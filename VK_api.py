@@ -24,6 +24,9 @@ class VK:
         return self.__get_data('friends.get', 'user_id=%s&fields=nickname' % self.user_id)
 
     def get_audios(self):
+        """
+        note: first item in list is integer (sum of all audio tracks for the user)
+        """
         return self.__get_data('audio.get', 'owner_id=%s&access_token=%s' % (self.user_id, self.token))
 
     def get_groups(self):

@@ -1,4 +1,4 @@
-__author__ = 'Dmitry Cheyshvily'
+__author__ = 'Dmitry Cheyshvili'
 import urllib2
 import json
 
@@ -20,20 +20,28 @@ class VK:
             return list()
         return data[u'response']
 
-    def get_friends(self):
-        return self.__get_data('friends.get', 'user_id=%s&fields=nickname' % self.__user_id)
+    def get_friends(self, user_id=None):
+        if not user_id:
+            user_id = self.__user_id
+        return self.__get_data('friends.get', 'user_id=%s&fields=nickname' % user_id)
 
-    def get_audios(self):
+    def get_audios(self, user_id=None):
         """
         note: first item in list is integer (sum of all audio tracks for the user)
             if you want to get tracks only, use get_audios()[1:]
         """
-        return self.__get_data('audio.get', 'owner_id=%s&access_token=%s' % (self.__user_id, self.__token))
+        if not user_id:
+            user_id = self.__user_id
+        return self.__get_data('audio.get', 'owner_id=%s&access_token=%s' % (user_id, self.__token))
 
-    def get_groups(self):
-        return self.__get_data('groups.get', 'user_id=%s&access_token=%s' % (self.__user_id, self.__token))
+    def get_groups(self, user_id=None):
+        if not user_id:
+            user_id = self.__user_id
+        return self.__get_data('groups.get', 'user_id=%s&access_token=%s' % (user_id, self.__token))
 
-    def get_users_info(self, ids):
+    def get_users_info(self, ids=None):
+        if not ids:
+            ids = self.__user_id
         return self.__get_data('users.get', 'user_ids=%s' % ids)
 
     def get_groups_by_ids(self, groups_id):

@@ -15,7 +15,6 @@ class VK:
     def __get_data(self, method, params):
         res = urllib2.urlopen(self.url % method, params).read()
         data = json.loads(res)
-
         if 'error' in data:
             print data
             return list()

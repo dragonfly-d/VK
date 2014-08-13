@@ -26,6 +26,7 @@ class VK:
     def get_audios(self):
         """
         note: first item in list is integer (sum of all audio tracks for the user)
+            if you want to get tracks only, use get_audios()[1:]
         """
         return self.__get_data('audio.get', 'owner_id=%s&access_token=%s' % (self.user_id, self.token))
 
